@@ -1,0 +1,104 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- inform_number_of_rooms
+- inform_room_type
+- book_room:
+    use_entities: []
+- faq
+- greet
+- goodbye
+- cleaning
+- inform_clean_urgent
+- inform_clean_schedule:
+    use_entities: []
+entities:
+- number_of_rooms
+- room_type
+- clean_time
+slots:
+  clean_time:
+    type: text
+    influence_conversation: false
+  number_of_rooms:
+    type: float
+    influence_conversation: false
+    max_value: 1.0
+    min_value: 0.0
+  requested_slot:
+    type: text
+    influence_conversation: false
+  room_type:
+    type: unfeaturized
+    influence_conversation: false
+responses:
+  utter_faq/ask_check-in:
+  - text: Check-in time starts at 4 PM. Minimum check-in age is 21. Please contact
+      the reception for early check-in requests.
+  utter_faq/ask_check-out:
+  - text: Check-out time is 11 AM. Please contact the reception for late checkout
+      requests.
+  utter_faq/ask_reservation:
+  - text: To cancel a reservation, select the “Reservations” link from the homepage.
+      On the Reservations page, under the heading ‘View, Change or Cancel a Reservation,’
+      enter your confirmation number, and either the last name on the reservation
+      or the last four digits of the credit card used to make the reservation.
+  utter_faq/ask_cancellation_policy:
+  - text: The booking deposit is refundable if the cancellation occurs at least 15
+      days before arrival. For cancellations made after this limit, a penalty will
+      be imposed based on the cancellation policy.
+  utter_faq/ask_restaurant:
+  - text: Yes, the hotel has a restaurant called the Zephyr Bar. With our menu we
+      strive to reflect the historic art and the spirit of our neighborhood by offering
+      a glimpse into what makes our area unique.
+  utter_faq/ask_breakfast:
+  - text: The hotel provides its guests with a free made-to-order breakfast each morning.
+  utter_faq/ask_breakfast_timing:
+  - text: Monday through Friday breakfast is 6 am to 9 am. On Saturday and Sunday,
+      we are open from 7 am to 10:30 am.
+  utter_faq/ask_timing:
+  - text: Our restaurant serves a dazzling 24-hour menu.
+  utter_ask_number_of_rooms:
+  - text: How many rooms would you like to book?
+  utter_ask_room_type:
+  - buttons:
+    - payload: /inform_room_type{{"room_type":"simple"}}
+      title: Simple
+    - payload: /inform_room_type{{"room_type":"deluxe"}}
+      title: Deluxe
+    text: What type of room do you want to book?
+  utter_confirmation:
+  - text: You have chosen to book {number_of_rooms} {room_type} rooms. 
+  utter_ask_clean_time:
+  - text: When should I arrange for the cleaning
+  - text: When do you want your room cleaned?
+  utter_clean_urgent:
+  - text: Sure, I will send someone to your room right away
+  utter_clean_schedule:
+  - text: Sure, I have scheduled a cleaning after {clean_time}.
+  utter_greet:
+  - text: Hello. I am a bot here to help you. What can I help you with?
+  utter_goodbye:
+  - text: Have a good day. Bye!
+actions:
+- utter_ask_clean_time
+- utter_ask_number_of_rooms
+- utter_ask_room_type
+- utter_clean_urgent
+- utter_confirmation
+- utter_clean_schedule
+- utter_greet
+- utter_goodbye
+forms:
+  booking_form:
+    number_of_rooms:
+    - entity: number_of_rooms
+      type: from_entity
+    room_type:
+    - entity: room_type
+      type: from_entity
+  cleaning_form:
+    clean_time:
+    - entity: clean_time
+      type: from_entity
