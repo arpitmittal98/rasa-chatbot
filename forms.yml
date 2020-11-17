@@ -1,0 +1,13 @@
+forms:
+   booking_form:
+     number_of_rooms:
+     - type: from_entity
+       entity: number_of_rooms
+     room_type:
+     - type: from_entity
+       entity: room_type
+   
+   cleaning_form:
+     clean_time:	
+     - type: from_entity
+       entity: clean_time

@@ -1,0 +1,63 @@
+version: "2.0"
+
+rules:
+ - rule: respond to FAQs
+   steps:
+   - intent: faq
+   - action: utter_faq
+
+ - rule: cleaning enquiry
+   steps: 
+   - intent: cleaning
+   - action: utter_ask_clean_time
+
+ - rule: urgent cleaning
+   steps: 
+   - intent: inform_clean_urgent
+   - action: utter_clean_urgent
+  
+ - rule: activate cleaning form
+   steps:
+   - intent: inform_clean_schedule
+   - action: cleaning_form
+   - active_loop: cleaning_form
+
+ - rule: Submit cleaning form
+   condition:
+   - active_loop: cleaning_form
+   steps:
+   - action: cleaning_form
+   - active_loop: null
+   - action: utter_clean_schedule
+ 
+ - rule: Bonus section
+   condition:
+   - active_loop: booking_form
+   steps:
+   - intent: faq
+   - action: utter_faq
+   - action: booking_form
+   - active_loop: booking_form
+
+ - rule: activate booking form
+   steps:
+   - intent: book_room
+   - action: booking_form
+   - active_loop: booking_form
+
+ - rule: submit form
+   condition: 
+   - active_loop: booking_form
+   steps:
+   - action: booking_form
+   - active_loop: null
+   - action: utter_confirmation
+
+ - rule: Bonus section
+   condition:
+   - active_loop: cleaning_form
+   steps:
+   - intent: faq
+   - action: utter_faq
+   - action: cleaning_form
+   - active_loop: cleaning_form
