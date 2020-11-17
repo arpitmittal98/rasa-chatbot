@@ -1,0 +1,64 @@
+version: "2.0"
+stories:
+- story: Story from Conversation ID 7e18429dde674f5cb2fa3d94cc46619e
+  steps:
+  - intent: cleaning
+    user: |-
+      I want to get my room cleaned
+  - action: utter_ask_clean_time
+  - intent: inform_clean_urgent
+    user: |-
+      urgently
+  - action: utter_clean_urgent
+  - intent: faq/ask_restaurant
+    user: |-
+      does the hotel have a restaurant
+  - action: utter_faq
+  - intent: faq/ask_breakfast
+    user: |-
+      does the hotel offer breakfast
+  - action: utter_faq
+  - slot_was_set:
+    - room_type: deluxe
+  - intent: book_room
+    user: |-
+      i want to book a deluxe room
+    entities:
+    - room_type: deluxe
+  - action: booking_form
+  - active_loop: booking_form
+  - slot_was_set:
+    - room_type: deluxe
+  - intent: faq/ask_check-in
+    user: |-
+      when is the checkin time
+  - action: utter_faq
+  - action: booking_form
+  - slot_was_set:
+    - requested_slot: number_of_rooms
+  - intent: faq/ask_check-out
+    user: |-
+      and what is the check out time
+  - action: utter_faq
+  - action: booking_form
+  - slot_was_set:
+    - requested_slot: number_of_rooms
+  - intent: faq/ask_breakfast_timing
+    user: |-
+      what are the breakfast timings
+  - action: utter_faq
+  - action: booking_form
+  - slot_was_set:
+    - requested_slot: number_of_rooms
+  - slot_was_set:
+    - number_of_rooms: '6'
+  - intent: inform_number_of_rooms
+    user: |-
+      i think 6 rooms
+    entities:
+    - number_of_rooms: '6'
+  - action: booking_form
+  - active_loop: null
+  - slot_was_set:
+    - number_of_rooms: '6'
+  - action: utter_confirmation
