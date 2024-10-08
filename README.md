@@ -8,7 +8,7 @@ The bot is able to do the following:-
 2.) Ask for your room to be cleaned either right away or schedule it for later  
 3.) Ask FAQ's pertaining to the hotel and other facilities. Some examples are-  
     * Check-in time    
-    * Checck-out time     
+    * Check-out time     
     * Breakfast availablity and timings  
     * Cancellation Policy and cancelling your reservation  
     * Restaurant timings and availablity  
